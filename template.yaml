@@ -5,12 +5,19 @@ Description: >
 
   Original: Check out https://github.com/serverlesspub/ffmpeg-aws-lambda-layer
   for more information.
+Parameters:
+  ffmpegVersion:
+    Type: String
+    Default: latest
+  ffmpegFriendlyVersion:
+    Type: String
+    Default: latest
 Resources:
   LambdaLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: ffmpeg 
-      Description: FFMPEG for ARM64 AWS Lambda
+      LayerName: !Sub "ffmpeg-${ffmpegVersion}-arm64" 
+      Description: !Sub "FFMPEG (version: ${ffmpegFriendlyVersion}) for ARM64 AWS Lambda"
       ContentUri: build/layer
       CompatibleArchitectures:
         - arm64
