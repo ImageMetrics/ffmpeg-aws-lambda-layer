@@ -1,4 +1,5 @@
 STACK_NAME ?= ffmpeg-lambda-layer
+FFMPEG_VERSION ?= 6.0.1 # default to 6.0.1 version
 
 clean: 
 	rm -rf build
@@ -6,7 +7,7 @@ clean:
 build/layer/bin/ffmpeg: 
 	mkdir -p build/layer/bin
 	rm -rf build/ffmpeg*
-	cd build && curl https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz | tar x
+	cd build && curl https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$(FFMPEG_VERSION)-arm64-static.tar.xz | tar x
 	mv build/ffmpeg*/ffmpeg build/ffmpeg*/ffprobe build/layer/bin
 
 build/output.yaml: template.yaml build/layer/bin/ffmpeg
